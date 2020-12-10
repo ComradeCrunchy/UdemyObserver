@@ -1,11 +1,13 @@
 ﻿using System;
 using UnityEngine.Events;
 using UnityEngine;
+[System.Serializable]
+public class UnityGameObjectEvent : UnityEvent<GameObject>{}
 
 public class EventListener : MonoBehaviour
 {
     public Event gEvent;
-    public UnityEvent response;
+    public UnityGameObjectEvent response = new UnityGameObjectEvent();
 
     private void OnEnable()
     {
@@ -17,8 +19,8 @@ public class EventListener : MonoBehaviour
         gEvent.Unredgister(this);
     }
 
-    public void OnEventOccurs()
+    public void OnEventOccurs(GameObject go)
     {
-        response.Invoke();
+        response.Invoke(go);
     }
 }
